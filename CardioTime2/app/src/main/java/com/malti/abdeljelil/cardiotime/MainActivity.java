@@ -12,7 +12,22 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 
-public abstract class MainActivity extends Activity implements TextToSpeech.OnInitListener{
+
+
+public class MainActivity extends Activity implements TextToSpeech.OnInitListener{
+
+    private void speakIt(){
+        CharSequence test = "BITCH PLEASE!.. I'm tired. Not going for any run. Not today. Not tomorrow. Couch potato life for me";
+        tts.setPitch(0.5f);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            tts.speak(test, TextToSpeech.QUEUE_FLUSH, null, null);
+        }
+        else{
+            tts.speak(test.toString(), TextToSpeech.QUEUE_FLUSH, null);
+        }
+
+    }
+
 
 
 
@@ -26,41 +41,18 @@ public abstract class MainActivity extends Activity implements TextToSpeech.OnIn
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //button start pour le timer
+        tts= new TextToSpeech(this,this);
         button_start= (Button) findViewById(R.id.playButton);
         button_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CharSequence test = "this is the second try !";
-                //tts.speak(test, TextToSpeech.QUEUE_ADD, null, null);
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    tts.speak(test, TextToSpeech.QUEUE_FLUSH, null, null);
-                }
-                else{
-                    tts.speak(test.toString(), TextToSpeech.QUEUE_FLUSH, null);
-                }
-
+                speakIt();
             }
         });
 
-        tts= new TextToSpeech(this,this);
-
-    }
-
-
-public void onClick(View v){
-
-
-    //TODO generer timer
-
-    //if(variable==timer){
-
-        //tts.speak(timer)
 
 
     }
-
-
-
 
 
 
